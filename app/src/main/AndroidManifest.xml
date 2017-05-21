@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.xiaoqi.alarmmanagerdemo">
+    <application
+        android:name=".MyApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <receiver android:name="com.xiaoqi.alarmmanagerdemo.AlarmReceiver" android:process=":remote">
+        </receiver>
+        <service android:name="com.xiaoqi.alarmmanagerdemo.LocalService">
+        </service>
+        <service android:name="com.xiaoqi.alarmmanagerdemo.RomoteService" android:process=":romoteservice">
+        </service>
+
+        <service android:name="com.xiaoqi.alarmmanagerdemo.TestService">
+        </service>
+
+        <!--通过第三方库实现的进程保护-->
+        <service android:name=".Service1" android:process=":process1"/>
+        <receiver android:name=".Receiver1" android:process=":process1"/>
+        <service android:name=".Service2" android:process=":process2"/>
+        <receiver android:name=".Receiver2" android:process=":process2"/>
+
+        <!--通过AppWidget实现进程保护-->
+        <receiver android:name=".MyWidgetProvider" >
+            <intent-filter >
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.wd.appWidgetUpdate" >
+                </action>
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/mywidget" />
+        </receiver>
+    </application>
+
+</manifest>
